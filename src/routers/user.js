@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/user");
+const auth = require("../middlewares/auth");
 
 const router = new express.Router();
 
@@ -28,6 +29,21 @@ router.post("/users/login", async (req, res) => {
     res.send({ user, token });
   } catch (e) {
     res.status(400).send();
+  }
+});
+
+// LOGOUT USER
+router.post("/users/logout", auth, async (req, res) => {
+  console.log(req);
+  try {
+    req.user.tokens = req.user.tokens.filter(token => {
+      return token.token !== req.token;
+    });
+    await req.user.save();
+
+    res.send();
+  } catch (e) {
+    res.status(500).send();
   }
 });
 
