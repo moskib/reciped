@@ -1,5 +1,4 @@
 const User = require('../models/user.js');
-const multer = require('multer');
 
 const addUser = async user => {
   const userObj = new User(user);

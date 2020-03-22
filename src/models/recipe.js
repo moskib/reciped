@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
 const recipeSchema = new mongoose.Schema({
   name: {
@@ -12,13 +11,19 @@ const recipeSchema = new mongoose.Schema({
       amount: String
     }
   ],
+  instructions: String,
   defaultUnit: String,
   defaultImage: String,
   images: [
     {
       image: Buffer
     }
-  ]
+  ],
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  }
 });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
