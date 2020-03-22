@@ -1,10 +1,8 @@
-const express = require("express");
-require("./db/mongoose");
-const userRouter = require("./routers/user");
+const express = require('express');
+require('./db/mongoose');
 
 const app = express();
 
-app.use(express.json());
-app.use(userRouter);
+require('./routers')(app);
 
 module.exports = app;
