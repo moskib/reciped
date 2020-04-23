@@ -1,53 +1,53 @@
-const User = require('../models/user.js');
+const User = require('../models/user.js')
 
-const addUser = async user => {
-  const userObj = new User(user);
-  await userObj.save();
-  return userObj;
-};
+const addUser = async (user) => {
+  const userObj = new User(user)
+  await userObj.save()
+  return userObj
+}
 
-const generateAuthToken = async user => {
-  return await user.generateAuthToken();
-};
+const generateAuthToken = async (user) => {
+  return await user.generateAuthToken()
+}
 
 const loginUser = async (email, password) => {
-  const user = await User.findByCredentials(req.body.email, req.body.password);
-  return user;
-};
+  const user = await User.findByCredentials(email, password)
+  return user
+}
 
 const logoutUser = async (user, currentToken) => {
-  user.tokens = user.tokens.filter(token => token.token !== currentToken);
-  await user.save();
-};
+  user.tokens = user.tokens.filter((token) => token.token !== currentToken)
+  await user.save()
+}
 
-const updateUser = async (currrentUser, fieldsWithUpdates) => {
-  const updateFields = Object.keys(fieldsWithUpdates);
+const updateUser = async (currentUser, fieldsWithUpdates) => {
+  const updateFields = Object.keys(fieldsWithUpdates)
 
   updateFields.forEach(
-    updateField => (currrentUser[updateField] = fieldsWithUpdates[updateField])
-  );
-  await currentToken.save();
-  return currrentUser;
-};
+    (updateField) => (currentUser[updateField] = fieldsWithUpdates[updateField])
+  )
+  await currentUser.save()
+  return currentUser
+}
 
-const checkUpdateFields = userToUpdate => {
-  const updates = Object.keys(userToUpdate);
-  const allowedUpdates = ['name', 'email', 'password', 'age'];
-  const isValidOperation = updates.every(update => {
-    allowedUpdates.includes(update);
-  });
+const checkUpdateFields = (userToUpdate) => {
+  const updates = Object.keys(userToUpdate)
+  const allowedUpdates = ['name', 'email', 'password', 'age']
+  const isValidOperation = updates.every((update) => {
+    return allowedUpdates.includes(update)
+  })
 
-  return isValidOperation;
-};
+  return isValidOperation
+}
 
-const getUserById = async userId => {
-  const user = await User.findById(userId);
-  return user;
-};
+const getUserById = async (userId) => {
+  const user = await User.findById(userId)
+  return user
+}
 
-const deleteUser = async user => {
-  await user.remove();
-};
+const deleteUser = async (user) => {
+  await user.remove()
+}
 
 module.exports = {
   addUser,
@@ -58,4 +58,4 @@ module.exports = {
   getUserById,
   checkUpdateFields,
   deleteUser
-};
+}

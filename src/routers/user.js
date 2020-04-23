@@ -13,7 +13,7 @@ router.post('', async (req, res) => {
     const token = await userService.generateAuthToken(user);
     res.status(201).send({ user, token });
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send();
   }
 });
 
@@ -72,7 +72,7 @@ router.delete('/me', auth, async (req, res) => {
 
 const upload = multer({
   limits: {
-    fileSize: 1000000
+    fileSize: 1000000,
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
@@ -80,7 +80,7 @@ const upload = multer({
     }
 
     cb(undefined, true);
-  }
+  },
 });
 
 // ADD USER AVATAR

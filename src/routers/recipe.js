@@ -14,4 +14,22 @@ router.post('', auth, async (req, res) => {
   }
 });
 
+// UPDATE RECIPE
+router.patch('/:id', auth, async (req, res) => {
+  const fieldsAreValid = recipeService.checkUpdateFields(req.body);
+
+  if (!fieldsAreValid) {
+    return res.status(400).send({ error: 'Invalid updates!' });
+  }
+  try {
+    const udpatedRecipe = await recipeService.updateRecipe(
+      req.params.id,
+      req.body
+    );
+    return res.status(200).send(udpatedRecipe);
+  } catch (e) {
+    res.status(304).send();
+  }
+});
+
 module.exports = router;

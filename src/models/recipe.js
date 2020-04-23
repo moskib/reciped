@@ -3,27 +3,28 @@ const mongoose = require('mongoose');
 const recipeSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   ingredients: [
     {
-      name: String,
-      amount: String
-    }
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Ingredient',
+    },
   ],
   instructions: String,
   defaultUnit: String,
   defaultImage: String,
   images: [
     {
-      image: Buffer
-    }
+      image: Buffer,
+    },
   ],
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'User'
-  }
+    ref: 'User',
+  },
 });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
