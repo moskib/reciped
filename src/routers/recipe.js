@@ -28,7 +28,7 @@ router.patch('/:id', auth, async (req, res) => {
     );
     return res.status(200).send(udpatedRecipe);
   } catch (e) {
-    res.status(304).send();
+    res.status(400).send();
   }
 });
 

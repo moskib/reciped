@@ -20,6 +20,11 @@ const recipeSchema = new mongoose.Schema({
       image: Buffer,
     },
   ],
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: false,
+    ref: 'Category',
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
