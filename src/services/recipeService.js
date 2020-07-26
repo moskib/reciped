@@ -16,7 +16,6 @@ const getRecipeById = async (recipeId) => {
 
 const updateRecipe = async (recipeId, objWithUpdates) => {
   const recipe = await getRecipeById(recipeId);
-  console.log(recipe);
 
   const updateFields = Object.keys(objWithUpdates);
   updateFields.forEach(
@@ -36,6 +35,7 @@ const checkUpdateFields = (recipeToUpdate) => {
     'defaultUnit',
     'defaultImage',
     'images',
+    'category',
   ];
   const isValidOperation = updates.every((udpate) => {
     return allowedUpdates.includes(udpate);
